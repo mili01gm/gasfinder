@@ -1,27 +1,28 @@
 'use strict';
 
 const render = (root) => {
-  root.empty();
-  const wrapper = $('<div class="wrapper"></div>');
-  wrapper.append(Header(_ => render(root)));
-  root.append(wrapper);
+    root.empty();
+    const wrapper = $('<div class="wrapper"></div>');
+    wrapper.append(Header(_ => render(root)));
+    wrapper.append(Search(_ => render(root)));
+    root.append(wrapper);
 }
 
 const state = {
-  stations: null,
-  selectedStation: null
+    stations: null,
+    selectedStation: null
 };
 
-$( _ => {
+$(_ => {
 
-  getJSON('stations.json', (err, json) => {
+    getJSON('stations.json', (err, json) => {
 
-    if (err) { return alert(err.message);}
+        if (err) { return alert(err.message); }
 
-    state.stations = json;
+        state.stations = json;
 
-    const root = $('.root');
-    render(root);
-  });
+        const root = $('.root');
+        render(root);
+    });
 
 });

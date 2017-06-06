@@ -1,19 +1,32 @@
 * {
-  margin:0px;
-  padding:0px;
-  box-sizing: border-box;
-  font-family: 'Roboto', sans-serif;
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+    font-family: 'Roboto', sans-serif;
+    overflow: hidden;
+}
+
+.bg-red {
+    background-color: #F44336;
 }
 
 header {
-  color: #fff;
-  font-size: 18px;
-  height: 56px;
-  line-height: 56px;
-  padding-left: 16px;
-  background-color: #F44336;
+    color: #fff;
+    font-size: 18px;
+    height: 56px;
+    line-height: 56px;
+    padding-left: 16px;
 }
 
 header .fa-chevron-left {
-  margin-right: 16px;
+    margin-right: 16px;
+}
+
+.container {
+    padding: 10px 0;
+}
+
+hr {
+    margin-top: 5px;
+    margin-bottom: 5px;
 }

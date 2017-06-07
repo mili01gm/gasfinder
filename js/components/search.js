@@ -2,31 +2,35 @@
 
 //Completar la lista de estaciones de la busqueda
 const SearchItem = (data, stations) => {
-    const todo = $('<div class="itemStation"></div>');
-    const name = $('<h4>' + +'</h4>');
-    const span = $('<span>' + data.text + '</span>');
-    const detail = $('<button>Details</button>');
+    const item = $('<div class="item"></div');
+    const name = $('<h6>' + data.name + '</h6>');
+    const adress = $('<p>' + data.address + '</p>');
+    const distric = $('<p>' + data + district + '</p>');
+    const link = $('<a href="#"></a>');
+    const iconMap = $('<i class="fa fa-map"></i>');
 
-    todo.append(checkbox);
-    todo.append(span);
-    todo.append(remove);
+    link.append(iconMap);
+    item.append(name);
+    item.append(adress);
+    item.append(district);
+    item.append(link);
 
-    details.on('click', (e) => {
-        const idx = state.todos.map(x => x.text).indexOf(data.text);
-        state.todos.splice(idx, 1);
+    link.on("click", (e) => {
+        e.preventDefault();
+        state.selectedStation = station;
         update();
     });
 
-    return todo;
+    return item;
 }
 
 
 // el render para la busqueda
-const reRender = (stationsList, selectedStations) => {
+const reRender = (stationsList, filtered) => {
     stationsList.empty();
 
-    selectedStations.forEach(station => {
-        stationsList.append(SearchItem(station, _ => { reRender(stationsList, selectedStations); }));
+    filtered.forEach(station => {
+        stationsList.append(SearchItem(station, _ => { reRender(stationsList, filtered); }));
     });
 }
 
@@ -60,7 +64,7 @@ const Search = (update) => {
             console.log(filterByDistrict(state.stations, input.val()));
             var selectedStations = filterByDistrict(state.stations, input.val());
         }
-        // reRender(stationList, selectedStations);
+        reRender(list, selectedStations);
     });
 
     return parent;

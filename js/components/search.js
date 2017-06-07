@@ -3,7 +3,7 @@
 //Completar la lista de estaciones de la busqueda
 const SearchItem = (data, stations) => {
     const item = $('<div class="item"></div');
-    const name = $('<h6>' + data.name + '</h6>');
+    const name = $('<h5>' + data.name + '</h5>');
     const adress = $('<p>' + data.address + '</p>');
     const district = $('<p>' + data.district + '</p>');
     const link = $('<a href="#"></a>');
@@ -23,16 +23,6 @@ const SearchItem = (data, stations) => {
 
     return item;
 }
-
-
-// const reRender = (stationsList, filtered) => {
-//     stationsList.empty();
-
-//     filtered.forEach(station => {
-//         stationsList.append(SearchItem(station, update));
-
-//     });
-// }
 
 
 //el input con el espacio para la lista
@@ -57,19 +47,27 @@ const Search = (update) => {
     container.append(row);
     parent.append(container);
     parent.append(hr);
-    parent.append(list);
 
-    //to add each station to the list
     state.stations.forEach(station => {
         list.append(SearchItem(station, update));
     });
 
-    input.on('keyup', (e) => { //keyup para que filtre por tecla
-        if (input.val() != "") {
-            var selectedStations = filterByDistrict(state.stations, input.val());
-        }
-        // reRender(list, selectedStations, update);
+    parent.append(list);
+
+    input.on("keyup", (e) => {
+        e.preventDefault();
+        const filtered = filterByDistrict(state.stations, $(e.currentTarget).val());
+        reRun(list, filtered);
     });
 
     return parent;
+}
+
+const reRun = (list, filtered, update) => {
+    list.empty();
+    console.log(filtered);
+
+    filtered.forEach(station => {
+        list.append(SearchItem(station, update));
+    });
 }

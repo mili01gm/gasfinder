@@ -7,7 +7,10 @@ const render = (root) => {
     if (state.selectedStation == null) {
         wrapper.append(Search(_ => render(root)));
     } else {
+        const gmap = GasMap();
+        wrapper.append(gmap);
         wrapper.append(StationDetail(_ => render(root)));
+        gmap.init();
     }
     root.append(wrapper);
 }

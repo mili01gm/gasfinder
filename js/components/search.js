@@ -1,7 +1,7 @@
 'use strict';
 
 //Completar la lista de estaciones de la busqueda
-const SearchItem = (data, stations) => {
+const SearchItem = (data, update) => {
     const item = $('<div class="item"></div');
     const name = $('<h5>' + data.name + '</h5>');
     const adress = $('<p>' + data.address + '</p>');
@@ -17,7 +17,7 @@ const SearchItem = (data, stations) => {
 
     link.on("click", (e) => {
         e.preventDefault();
-        state.selectedStation = station;
+        state.selectedStation = data;
         update();
     });
 
@@ -57,7 +57,7 @@ const Search = (update) => {
     input.on("keyup", (e) => {
         e.preventDefault();
         const filtered = filterByDistrict(state.stations, $(e.currentTarget).val());
-        reRun(list, filtered);
+        reRun(list, filtered, update);
     });
 
     return parent;

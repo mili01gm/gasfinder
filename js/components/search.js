@@ -5,7 +5,7 @@ const SearchItem = (data, stations) => {
     const item = $('<div class="item"></div');
     const name = $('<h6>' + data.name + '</h6>');
     const adress = $('<p>' + data.address + '</p>');
-    const distric = $('<p>' + data + district + '</p>');
+    const district = $('<p>' + data.district + '</p>');
     const link = $('<a href="#"></a>');
     const iconMap = $('<i class="fa fa-map"></i>');
 
@@ -25,20 +25,20 @@ const SearchItem = (data, stations) => {
 }
 
 
-// el render para la busqueda
-const reRender = (stationsList, filtered) => {
-    stationsList.empty();
+// const reRender = (stationsList, filtered) => {
+//     stationsList.empty();
 
-    filtered.forEach(station => {
-        stationsList.append(SearchItem(station, _ => { reRender(stationsList, filtered); }));
-    });
-}
+//     filtered.forEach(station => {
+//         stationsList.append(SearchItem(station, update));
+
+//     });
+// }
 
 
 //el input con el espacio para la lista
 const Search = (update) => {
     const parent = $('<div class="search"></div>');
-    const container = $('<div class="container bg-red"></div>');
+    const container = $('<div class="container-fluid bg-red"></div>');
     const row = $('<div class="row"></div>');
     const col = $('<div class="col-xs-12 col-sm-12 col-md-12"></div>');
     const inputGroup = $('<div class="input-group"></div>');
@@ -59,12 +59,16 @@ const Search = (update) => {
     parent.append(hr);
     parent.append(list);
 
+    //to add each station to the list
+    state.stations.forEach(station => {
+        list.append(SearchItem(station, update));
+    });
+
     input.on('keyup', (e) => { //keyup para que filtre por tecla
         if (input.val() != "") {
-            console.log(filterByDistrict(state.stations, input.val()));
             var selectedStations = filterByDistrict(state.stations, input.val());
         }
-        reRender(list, selectedStations);
+        // reRender(list, selectedStations, update);
     });
 
     return parent;

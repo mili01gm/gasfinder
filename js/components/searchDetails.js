@@ -1,5 +1,6 @@
 'use strict';
 
-const StationDetail = () => {
+const StationDetail = (update) => {
     const infoStation = $('<div class="info"></div>');
+
 }
